@@ -1,12 +1,14 @@
 # noir-cljs
 A utility that adds CLJS compilation as middleware.
 
+NOTE: requires Noir 1.1.1-SNAPSHOT or later for Clojure 1.3.0 compliance.
+
 ## Usage
-In your Noir project add the following dependency and switch your Clojure version to 1.3.0-beta1:
+In your Noir project add the following dependency, switch your Clojure version to 1.3.0-beta1, and Noir to 1.1.1-SNAPSHOT:
 
 ```clojure
 [org.clojure/clojure "1.3.0-beta1"]
-...
+[noir "1.1.1-SNAPSHOT"]
 [noir-cljs "0.1.0-SNAPSHOT"]
 ```
 
