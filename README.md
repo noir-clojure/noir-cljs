@@ -16,7 +16,7 @@ Then in your server.clj add the middleware:
 (server/add-middleware noir.util.cljs/wrap-cljs)
 ```
 
-Now every time a .cljs file is changed in your src/ directory, a refresh will trigger the ClojureScript to recompile your file. By default, the output is put in resources/cljs/bootstrap.js, so simply add this to your layout:
+Now every time a .cljs file is changed in your src/ directory, a refresh will trigger the ClojureScript compiler to recompile. By default, the output is put in resources/cljs/bootstrap.js, so simply add this to your layout:
 
 ```clojure
 (include-js "/cljs/bootstrap.js")
