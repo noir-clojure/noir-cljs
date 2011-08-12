@@ -35,12 +35,13 @@
 (defn files-updated? [dir]
   (some newer? (find-cljs dir)))
 
-(defn wrap-cljs [handler]
-  (let [src-dir "src/"]
-    (compile-cljs src-dir)
-    (if (options/dev-mode?)
-      (fn [req]
-        (when (files-updated? src-dir)
-          (compile-cljs src-dir))
-        (handler req))
-      handler)))
+(defn wrap-cljs
+  ([handler] (wrap-cljs handler "src/"))
+  ([handler src-dir]
+     (compile-cljs src-dir)
+     (if (options/dev-mode?)
+       (fn [req]
+         (when (files-updated? src-dir)
+           (compile-cljs src-dir))
+         (handler req))
+       handler)))
