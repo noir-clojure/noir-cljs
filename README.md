@@ -12,7 +12,7 @@ In your Noir project add the following dependency, switch your Clojure version t
 [noir-cljs "0.1.0-SNAPSHOT"]
 ```
 
-Then in your server.clj add the middleware:
+Then in your server.clj require `noir.util.cljs` and add the middleware:
 
 ```clojure
 (server/add-middleware noir.util.cljs/wrap-cljs)
