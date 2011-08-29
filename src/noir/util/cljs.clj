@@ -1,5 +1,5 @@
 (ns noir.util.cljs
-  (:use clojure.java.io)
+  (:use [clojure.java.io :only [file]])
   (:require [noir.options :as options]
             [cljs.closure :as cljsc]))
 

@@ -1,3 +1,5 @@
+#Instead of noir-cljs, use [cljs-watch](https://github.com/ibdknox/cljs-watch) for a better and more consistent experience.
+
 # noir-cljs
 A utility that adds CLJS compilation as middleware.
 
