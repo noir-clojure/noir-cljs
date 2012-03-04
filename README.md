@@ -26,6 +26,8 @@ Noir CLJS also includes a client-side interface for switching between Advanced, 
 (noir.cljs.client.watcher/init)
 ```
 
+![client side interface](https://github.com/ibdknox/noir-cljs/raw/master/buttons.png)
+
 On the bottom right-hand corner you will now see the buttons you can use to switch between modes. Instant mode will cause the browser to poll the server for changes and any modification to a file will cause the updated forms to be sent to the client, allowing you to modify your cljs in real-time.
 
 And you can see the results of your compilation. By default, the optimization level is set to simple as it compiles much faster during development.
