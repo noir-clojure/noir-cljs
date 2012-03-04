@@ -53,7 +53,7 @@
    [:style {:type "text/css"}
     "#noir-cljs-selector {position:fixed; bottom:15px; right:30px; list-style:none; }
      #noir-cljs-selector li {}
-     #noir-cljs-selector a { float:left; display:inline; height:19px; padding:5px 10px; background:#77c; width:10px; border:1px solid #55c; text-align:center; border-radius:5px; margin-bottom:8px; color:#449; }
+     #noir-cljs-selector a { float:left; display:inline; text-decoration:none; line-height:1em; height:19px; padding:5px 10px; background:#77c; width:10px; border:1px solid #55c; text-align:center; border-radius:5px; margin-bottom:8px; color:#449; }
      #noir-cljs-selector a:hover {background:#99f;}
      #noir-cljs-selector .active {background:#7cc; border-color:#599;} "] 
    [:ul#noir-cljs-selector

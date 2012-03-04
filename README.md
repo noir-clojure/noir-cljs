@@ -4,10 +4,20 @@ A utility that adds instant CLJS compilation to your noir project, as well as a 
 ![client side interface](https://github.com/ibdknox/noir-cljs/raw/master/buttons.png)
 
 ## Usage
-In your Noir project add the following dependency, switch your Clojure version to 1.3.0-beta1, and Noir to 1.1.1-SNAPSHOT:
+In your Noir project add the following dependency:
 
 ```clojure
-[noir-cljs "0.2.0"]
+[noir-cljs "0.2.1"]
+
+;;You also need to set :main to skip aot compilation, e.g:
+
+(defproject noir-cljs-test "0.1.0-SNAPSHOT"
+            :description "FIXME: write this!"
+            :dependencies [[org.clojure/clojure "1.3.0"]
+                           [noir-cljs "0.2.1"]
+                           [noir "1.3.0-alpha10"]]
+            :main ^{:skip-aot true} noir-cljs-test.server)
+
 ```
 
 Then in your server.clj require `noir.cljs.core` and add the following line:
