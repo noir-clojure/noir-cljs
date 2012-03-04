@@ -1,5 +1,7 @@
 # noir-cljs
-A utility that adds CLJS compilation to your noir project.
+A utility that adds instant CLJS compilation to your noir project, as well as a client-side interface for controlling it as you work.
+
+![client side interface](https://github.com/ibdknox/noir-cljs/raw/master/buttons.png)
 
 ## Usage
 In your Noir project add the following dependency, switch your Clojure version to 1.3.0-beta1, and Noir to 1.1.1-SNAPSHOT:
@@ -25,8 +27,6 @@ Noir CLJS also includes a client-side interface for switching between Advanced, 
 ```clojure
 (noir.cljs.client.watcher/init)
 ```
-
-![client side interface](https://github.com/ibdknox/noir-cljs/raw/master/buttons.png)
 
 On the bottom right-hand corner you will now see the buttons you can use to switch between modes. Instant mode will cause the browser to poll the server for changes and any modification to a file will cause the updated forms to be sent to the client, allowing you to modify your cljs in real-time.
 
