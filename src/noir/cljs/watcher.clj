@@ -101,7 +101,6 @@
 
 (defn start [& [opts]]
   (reset! options opts)
-  (remove-aot)
   (doseq [f (get-files [(or (:src-dir opts) "src/")]
                        #(every? (fn [func] (func %))
                                 [(extensions :cljs) ignore-dotfiles]))]
