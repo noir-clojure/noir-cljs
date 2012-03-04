@@ -34,7 +34,7 @@
         (string/join "\n" (for [[nsp form] entries]
                             (compiler/->cljs form nsp)))))))
 
-(defpartial include-scripts [jquery?]
+(defpartial include-scripts [& [jquery?]]
   (when jquery?
     (include-js "https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"))
   (include-js "/cljs/bootstrap.js"))
