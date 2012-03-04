@@ -4,7 +4,8 @@
             [noir.cljs.compiler :as compiler]
             [noir.cljs.watcher :as watcher]
             [noir.cljs.watcher :as watcher])
-  (:use [noir.core :only [defpage]]))
+  (:use [noir.core :only [defpage defpartial]]
+        [hiccup.page-helpers :only [include-js]]))
 
 (defpage "/noir-cljs-get-updated" []
   (when (nopts/dev-mode?)
@@ -32,6 +33,11 @@
         (ref-set watcher/diffs [])
         (string/join "\n" (for [[nsp form] entries]
                             (compiler/->cljs form nsp)))))))
+
+(defpartial include-scripts [jquery?]
+  (when jquery?
+    (include-js "https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"))
+  (include-js "/cljs/bootstrap.js"))
 
 (defn start [& [opts]]
   (watcher/start opts))

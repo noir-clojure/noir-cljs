@@ -16,7 +16,8 @@
 (defn poll []
   (wait 100 #(fetch/xhr [:get "/noir-cljs-get-updated"] {}
                         (fn [data]
-                          (when data 
+                          (when (and data
+                                     (not= data ""))
                             (js/eval data)
                             (doseq [cur @callbacks]
                               (cur data)))

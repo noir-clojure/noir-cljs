@@ -19,7 +19,7 @@ Then in your server.clj require `noir.cljs.core` and add the following line:
 Now every time a .cljs file is changed in your src/ directory, the ClojureScript compiler will recompile your project. By default, the optimization mode is set to simple and the output is put in resources/cljs/bootstrap.js, so just add this to your layout:
 
 ```clojure
-(include-js "/cljs/bootstrap.js")
+(noir.cljs.core/include-scripts :with-jquery)
 ```
 
 Noir CLJS also includes a client-side interface for switching between Advanced, Simple, and Instant compilation modes. To include it, in one of your cljs files, require `noir.cljs.client.watcher` and add
