@@ -4,7 +4,7 @@ A utility that adds instant CLJS compilation to your noir project, as well as a 
 ![client side interface](https://github.com/ibdknox/noir-cljs/raw/master/buttons.png)
 
 ## Usage
-In your Noir project add the following dependency:
+In your Noir project add the following dependency **AND skip aot compilation**:
 
 ```clojure
 [noir-cljs "0.2.2"]
