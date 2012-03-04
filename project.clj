@@ -1,4 +1,4 @@
-(defproject noir-cljs "0.1.0-SNAPSHOT"
+(defproject noir-cljs "0.2.0"
   :description "A noir utility to add CLJS compiling through middleware"
   :dependencies [[org.clojure/clojure "1.3.0"]
                  [noir "1.2.2"]

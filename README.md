@@ -1,41 +1,37 @@
-#Instead of noir-cljs, use [cljs-watch](https://github.com/ibdknox/cljs-watch) for a better and more consistent experience.
-
 # noir-cljs
-A utility that adds CLJS compilation as middleware.
-
-NOTE: requires Noir 1.1.1-SNAPSHOT or later for Clojure 1.3.0 compliance.
+A utility that adds CLJS compilation to your noir project.
 
 ## Usage
 In your Noir project add the following dependency, switch your Clojure version to 1.3.0-beta1, and Noir to 1.1.1-SNAPSHOT:
 
 ```clojure
-[org.clojure/clojure "1.3.0-beta1"]
-[noir "1.1.1-SNAPSHOT"]
-[noir-cljs "0.1.0-SNAPSHOT"]
+[noir-cljs "0.2.0"]
 ```
 
-Then in your server.clj require `noir.util.cljs` and add the middleware:
+Then in your server.clj require `noir.cljs.core` and add the following line:
 
 ```clojure
-(server/add-middleware noir.util.cljs/wrap-cljs)
+(noir.cljs.core/start any-cljs-compiler-opts)
 ```
 
-Now every time a .cljs file is changed in your src/ directory, a refresh will trigger the ClojureScript compiler to recompile. By default, the output is put in resources/cljs/bootstrap.js, so simply add this to your layout:
+Now every time a .cljs file is changed in your src/ directory, the ClojureScript compiler will recompile your project. By default, the optimization mode is set to simple and the output is put in resources/cljs/bootstrap.js, so just add this to your layout:
 
 ```clojure
 (include-js "/cljs/bootstrap.js")
 ```
 
-And you can see the results of your compilation. If you need to change the options that the CLJS compiler uses, simply add an option key to server/start for :cljsc
+Noir CLJS also includes a client-side interface for switching between Advanced, Simple, and Instant compilation modes. To include it, in one of your cljs files, require `noir.cljs.client.watcher` and add
 
 ```clojure
-(server/start 8080 {:cljsc {:optimizations :advanced}})
+(noir.cljs.client.watcher/init)
 ```
 
-By default, the optimization level is set to simple as it compiles much faster during development.
+On the bottom right-hand corner you will now see the buttons you can use to switch between modes. Instant mode will cause the browser to poll the server for changes and any modification to a file will cause the updated forms to be sent to the client, allowing you to modify your cljs in real-time.
+
+And you can see the results of your compilation. By default, the optimization level is set to simple as it compiles much faster during development.
 
 ## License
 
-Copyright (C) 2011 Chris Granger
+Copyright (C) 2012 Chris Granger
 
 Distributed under the Eclipse Public License, the same as Clojure.
