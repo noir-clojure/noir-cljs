@@ -14,7 +14,7 @@
 (def watched (atom {}))
 (def diffs (ref []))
 (def mode (atom :simple))
-(def build-dirs ["src/" "checkouts/"])
+(def build-dirs ["checkouts/"])
 
 (defn ts []
     (let [c (Calendar/getInstance)
@@ -33,10 +33,10 @@
   (walk/postwalk (fn [x]
                    (if (symbol? x)
                      (let [sname (name x)
-                           index (.indexOf sname "__")] 
+                           index (.indexOf sname "__")]
                        (if (> index -1)
                          (symbol (subs sname 0 (+ 2 index)))
-                         x)) 
+                         x))
                      x))
                  form))
 
@@ -68,7 +68,7 @@
           :src-dir "src/"
           :optimizations m
           :pretty-print true}
-         @options))
+         (@options m)))
 
 (defn build [m]
   (let [options (compile-options m)]
@@ -93,20 +93,28 @@
   (println (ts) (c/green ":: Done")))
 
 (defn update-files [fs]
-  (println (ts) (c/cyan ":: Files updated") @mode)
+  (println (ts) (c/cyan ":: Files updated " @mode))
   (try
     (on-file-changed @mode fs)
     (catch Exception e
       (.printStackTrace e))))
 
+(defn set-mode [m]
+  (reset! mode m))
+
+(defn current-mode []
+  @mode)
+
 (defn start [& [opts]]
-  (reset! options opts)
-  (doseq [f (get-files [(or (:src-dir opts) "src/")]
-                       #(every? (fn [func] (func %))
-                                [(extensions :cljs) ignore-dotfiles]))]
-    (init-file f))
-  (watcher build-dirs 
-           (rate 100)
-           (file-filter (extensions :cljs))
-           (file-filter ignore-dotfiles)
-           (on-change update-files)))
+  (let [src-dir (or (get-in opts [@mode :src-dir]) "src/")]
+    (println (ts) (c/cyan ":: Using source dir: " src-dir))
+    (reset! options (or opts {}))
+    (doseq [f (get-files [src-dir]
+                         #(every? (fn [func] (func %))
+                                  [(extensions :cljs) ignore-dotfiles]))]
+      (init-file f))
+    (watcher (list* src-dir build-dirs)
+             (rate 100)
+             (file-filter (extensions :cljs))
+             (file-filter ignore-dotfiles)
+             (on-change update-files))))

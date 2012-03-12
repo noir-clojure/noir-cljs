@@ -1,9 +1,8 @@
-(ns noir.cljs.compiler 
+(ns noir.cljs.compiler
   (:require [cljs.compiler :as comp])
   (:import (clojure.lang LineNumberingPushbackReader)
            (java.io StringReader)))
 
-  
 (defn lined-reader
   "Create a line preserving reader for line-aware code evaluation in a sandbox."
   [s]
@@ -17,7 +16,7 @@
   (let [form (read (->form form))
         lined (map (juxt (comp :line meta) identity) (rest form))
         grouped (partition 2 1 lined)]
-    (reduce 
+    (reduce
       (fn [changed line]
         (let [line (inc line)
               _ (println line)
@@ -40,10 +39,10 @@
 (defn ->cljs [f & [nsp]]
   (binding [comp/*cljs-ns* (or nsp 'cljs.user)]
     (let [form (if (string? f)
-                 (binding [*ns* (create-ns comp/*cljs-ns*)] 
+                 (binding [*ns* (create-ns comp/*cljs-ns*)]
                    (read (->form f)))
                  f)
-          env {:context :statement :locals {}} 
+          env {:context :statement :locals {}}
           env (assoc env :ns (@comp/namespaces comp/*cljs-ns*))
           ast (comp/analyze env form)
           js (comp/emits ast)

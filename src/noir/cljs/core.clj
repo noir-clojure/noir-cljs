@@ -39,7 +39,9 @@
     (include-js "https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"))
   (include-js "/cljs/bootstrap.js"))
 
-(defn start [& [opts]]
+(defn start [server-mode & [opts]]
+  (when-not (= :dev server-mode)
+    (watcher/set-mode :advanced))
   (watcher/start opts))
 
 
