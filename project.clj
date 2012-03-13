@@ -2,7 +2,7 @@
   :description "A noir utility to add CLJS compiling through middleware"
   :dependencies [[org.clojure/clojure "1.3.0"]
                  [noir "1.2.2"]
-                 [fetch "0.1.0-alpha1"]
+                 [fetch "0.1.0-alpha2"]
                  [jayq "0.1.0-alpha1"]
                  [crate "0.1.0-alpha1"]
                  [watchtower "0.1.0"]
