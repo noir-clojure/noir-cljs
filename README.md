@@ -7,14 +7,14 @@ A utility that adds instant CLJS compilation to your noir project, as well as a 
 In your Noir project add the following dependency **AND skip aot compilation**:
 
 ```clojure
-[noir-cljs "0.2.5"]
+[noir-cljs "0.3.0"]
 
 ;;You also need to set :main to skip aot compilation, e.g:
 
 (defproject noir-cljs-test "0.1.0-SNAPSHOT"
             :description "FIXME: write this!"
             :dependencies [[org.clojure/clojure "1.3.0"]
-                           [noir-cljs "0.2.3"]
+                           [noir-cljs "0.3.0"]
                            [noir "1.3.0-alpha10"]]
             :main ^{:skip-aot true} noir-cljs-test.server)
 
