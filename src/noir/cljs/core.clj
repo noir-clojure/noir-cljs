@@ -5,7 +5,7 @@
             [noir.cljs.watcher :as watcher]
             [noir.cljs.watcher :as watcher])
   (:use [noir.core :only [defpage defpartial]]
-        [hiccup.page-helpers :only [include-js]]))
+        [hiccup.page :only [include-js]]))
 
 (defpage "/noir-cljs-get-updated" []
   (when (nopts/dev-mode?)
