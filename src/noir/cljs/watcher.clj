@@ -114,7 +114,7 @@
                                   [(extensions :cljs) ignore-dotfiles]))]
       (init-file f))
     (watcher (list* src-dir build-dirs)
-             (rate 100)
+             (rate 500)
              (file-filter (extensions :cljs))
              (file-filter ignore-dotfiles)
              (on-change update-files))))
