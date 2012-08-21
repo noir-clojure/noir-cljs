@@ -41,7 +41,7 @@
 
 (defn start [server-mode & [opts]]
   (when-not (= :dev server-mode)
-    (watcher/set-mode :advanced))
-  (watcher/start opts))
-
-
+    (if-let [[mode] (keys opts)]
+      (watcher/set-mode mode)
+      (watcher/set-mode :advanced)) ;; fallback to :advanced when no opts
+    (watcher/start opts)))
