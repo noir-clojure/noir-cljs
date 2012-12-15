@@ -1,5 +1,6 @@
 (ns noir.cljs.compiler
-  (:require [cljs.compiler :as comp])
+  (:require [cljs.compiler :as comp]
+            [cljs.analyzer :as ana])
   (:import (clojure.lang LineNumberingPushbackReader)
            (java.io StringReader)))
 
@@ -37,16 +38,16 @@
       line-nums)))
 
 (defn ->cljs [f & [nsp]]
-  (binding [comp/*cljs-ns* (or nsp 'cljs.user)]
+  (binding [ana/*cljs-ns* (or nsp 'cljs.user)]
     (let [form (if (string? f)
-                 (binding [*ns* (create-ns comp/*cljs-ns*)]
+                 (binding [*ns* (create-ns ana/*cljs-ns*)]
                    (read (->form f)))
                  f)
           env {:context :statement :locals {}}
-          env (assoc env :ns (@comp/namespaces comp/*cljs-ns*))
-          ast (comp/analyze env form)
+          env (assoc env :ns (@ana/namespaces ana/*cljs-ns*))
+          ast (ana/analyze env form)
           js (comp/emits ast)
-          wrap-js (comp/emits (binding [comp/*cljs-warn-on-undeclared* false]
-                                (comp/analyze env form)))]
+          wrap-js (comp/emits (binding [ana/*cljs-warn-on-undeclared* false]
+                                (ana/analyze env form)))]
       wrap-js)))
 
